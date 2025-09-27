@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sketching Turing</title>
+    <meta name="description" content="Jogo onde você desenha objetos históricos e a IA tenta adivinhar">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.5.0/lib/p5.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@3.21.0/dist/tf.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@0.8/dist/teachablemachine-image.min.js"></script>
+    <script src="tm-config.js"></script>
+    <link rel="stylesheet" href="style.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+</head>
+
+<body>
+    <header>
+        <!-- Header vazio para futuras expansões -->
+    </header>
+
+    <main>
+        <!-- Página Inicial (Nome) -->
+        <section id="home-page" class="container mx-auto px-4 py-12 flex flex-col items-center justify-center min-h-screen">
+            <div id="caixa-n" class="max-w-md w-full  p-8 rounded-xl shadow-lg text-center">
+                <div class="mb-6">
+                    <h2 class="user">Usuário:</h2>
+                    <input type="text" id="player-name" class="input" placeholder="Digite seu nome">
+                    <i class="bx bxs-user"></i>
+                </div>
+
+                <div class="space-y-4 mb-8">
+                    <button id="continuar" onclick="proceedToTheme()" class="btn">Avançar</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Página de Seleção de Tema -->
+        <section id="theme-page" class="hidden container mx-auto px-4 py-12 flex flex-col items-center justify-center min-h-screen">
+            <div id="caixa-t" class="max-w-md w-full p-8 rounded-xl shadow-lg text-center">
+                <div class="space-y-4 mb-8">
+                    <h2 class="tema">Temas:</h2>
+                    <h2 class="tt">Escolha um tema para iniciar o jogo:</h2>
+                    <button onclick="startGame('pre-history')" class="btn">Pré-História</button>
+                    <button onclick="startGame('world-wars')" class="btn">Guerras Mundiais</button>
+                    <button onclick="startGame('antiquity')" class="btn">Antiguidade</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Página do Jogo -->
+        <section id="game-page" class="hidden container mx-auto px-2 py-8 min-h-screen">
+            <div class="max-w-3xl mx-auto">
+                
+                
+                <div id="suggestions" class="mb-6 p-4 bg-black rounded-lg shadow">
+                    <div class="flex justify-between items-center mb-2">
+                        <h2 id="theme-title" class=" font-bold "></h2>
+                    <div id="timer" class="timer">30s</div>
+                </div>
+
+                    <div id="suggestion-items" class="flex flex-wrap gap-2"></div>
+                </div>
+                
+                
+
+                <!-- ANALISE IA -->
+                <!-- <div class="bg-black p-4 rounded-lg shadow"> -->
+                    
+
+                <div id="caixa" class="bg-black p-4 rounded-lg shadow mb-6"> 
+                    
+                   <!-- <h3 class="text-lg font-semibold text-blue-400 mb-4">Análise da IA:</h3>-->
+                    
+                    <div id="ai-guess" class="ai-guess text-xl font-medium text-blue-500 min-h-8">Desenhe alguma das opções do tema!</div>
+
+                    
+                    <!-- Mensagem IA -->
+                    <div id="correct-guess-container" class="hidden mt-6 p-4 bg-green-400 border border-green-600 text-green-800 rounded-lg text-center">
+                        <p class="text-2xl font-bold">A IA adivinhou: <span id="correct-guess"></span>!</p>
+                        <p class="mt-2">Parabéns! Você marcou <span id="round-points"></span> pontos nessa rodada.</p>
+                    </div>
+
+
+                    <div id="sketch-container" class="flex justify-center"></div>
+                    <div class="flex justify-center mt-4">
+                        <button id="clear-btn" class="btn-gray">Limpar</button>
+                        <button id="btn-correct" class="bg-green-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-green-700 transition-colors">✓ Correto</button>
+                        <button id="btn-wrong" class="bg-red-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-red-700 transition-colors">✕ Incorreto</button>
+                    </div>
+                </div>
+
+
+
+
+                
+
+                <div id="btns-feedback" class="hidden flex justify-center gap-4 mt-4">
+                    
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Página de Ranking -->
+        <section id="ranking-page" class="hidden container mx-auto px-4 py-12 min-h-screen">
+            <div class="max-w-md mx-auto bg-black p-8 rounded-xl shadow-lg">
+                <h2 class="text-3xl font-bold text-blue-500 mb-6 text-center">Ranking</h2>
+                
+                <div class="mb-8 text-center">
+                    <p id="player-score" class="text-4xl font-bold text-green-600 mt-2">0</p>
+                    <p class="text-xl text-blue-100"><span id="player-result-name" class="font-semibold text-blue-100"></span>, sua pontuação foi:</p>
+                   
+                </div>
+                
+                <div class="mb-8">
+
+                    <div id="ranking-list" class="space-y-2"></div>
+                </div>
+                
+                <button onclick="backToHome()" class="btn w-full bg-red-700 text-white">Reiniciar</button>
+            </div>
+        </section>
+    </main>
+
+    <!-- Elemento de áudio para som de tempo esgotado -->
+    <audio id="timeUpSound" preload="auto">
+        <source src="som.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- Script JavaScript -->
+    <script src="script.js"></script>
+</body>
+</html>
+

@@ -1,0 +1,533 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Cabin:ital,wght@0,400..700;1,400..700&display=swap'); 
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Cabin:ital,wght@0,400..700;1,400..700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap'); 
+/* Importa as famílias de fontes utilizadas no projeto para títulos e textos gerais. */
+
+/* Reset CSS: remove espaçamentos e define box-sizing padrão para previsibilidade visual */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-weight: 400;
+}
+
+/* Estilização padrão para subtítulos principais exibidos na interface */
+h2{
+    font-family: "Cabin", sans-serif;
+    color: rgb(255, 255, 255);
+    font-size: 50px;
+    font-weight: 900;
+    margin: 1rem;
+    border-radius: 10%;
+    
+}
+/*distanmcia do canva*/
+#ai-guess{
+    padding: 25px;
+    font-size: 25px;
+}
+
+/*
+#continuar{
+    background-color: rgb(1, 63, 172);
+    
+}
+a*/
+
+
+#theme-title{
+    font-size: 50px;
+}
+
+
+
+/* Corpo da página: tipografia base e plano de fundo geral do site
+   Observação: cada página terá seu próprio fundo específico */
+body {
+    font-family: "Cabin", sans-serif;
+    /* Fundo padrão com gradiente azul meio escuro para azul marinho em movimento */
+    background: linear-gradient(135deg, #1e3a8a, #0f172a);
+    background-size: 400% 400%;
+    animation: gradientMove 30s ease infinite;
+    min-height: 100vh;
+    position: relative;
+    overflow-x: hidden;
+}
+
+/* Bolinhas brancas animadas no fundo */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: 
+        radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.7) 2px, transparent 2px),
+        radial-gradient(circle at 80% 40%, rgba(255, 255, 255, 0.6) 1px, transparent 1px),
+        radial-gradient(circle at 40% 60%, rgba(255, 255, 255, 0.8) 1.5px, transparent 1.5px),
+        radial-gradient(circle at 90% 80%, rgba(255, 255, 255, 0.65) 1px, transparent 1px),
+        radial-gradient(circle at 10% 90%, rgba(255, 255, 255, 0.75) 2px, transparent 2px),
+        radial-gradient(circle at 60% 10%, rgba(255, 255, 255, 0.6) 1px, transparent 1px),
+        radial-gradient(circle at 30% 70%, rgba(255, 255, 255, 0.7) 1.5px, transparent 1.5px),
+        radial-gradient(circle at 70% 30%, rgba(255, 255, 255, 0.65) 1px, transparent 1px);
+    background-size: 200px 200px, 150px 150px, 180px 180px, 160px 160px, 220px 220px, 140px 140px, 190px 190px, 170px 170px;
+    animation: floatingParticles 30s linear infinite;
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* Cabeçalho do site: aplica a imagem "fecart .png" como logotipo/cabeçalho sem distorção
+   - background-size: contain evita distorções, respeitando a proporção da imagem
+   - height define a altura do cabeçalho sem depender de conteúdo no HTML
+   - box-shadow cria uma sombra apenas na parte inferior do cabeçalho */
+header {
+    background-image: url("./fecart.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 250px;
+    width: 100%;
+    position: relative;
+    box-shadow: 0 14px 22px -12px rgba(0, 0, 0, 0.45);
+    background-color: #ffffff;
+    z-index: 10;
+}
+
+
+/* Página Inicial: mantém a imagem de fundo 
+#home-page {
+    background-image: url('d2.jpeg');
+    background-size:auto;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    position: relative;
+}
+
+#theme-page{
+    background-image: url('d2.jpeg');
+    background-size:auto;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    position: relative;
+} 
+*/
+
+
+/* Página do Jogo: fundo com gradiente azul meio escuro para azul marinho em movimento */
+#game-page {
+    background: linear-gradient(135deg, #1e3a8a, #0f172a);
+    background-size: 400% 400%;
+    animation: gradientMove 8s ease infinite;
+}
+
+/* Página de Ranking: fundo com gradiente azul meio escuro para azul marinho em movimento */
+#ranking-page {
+    background: linear-gradient(135deg, #1e3a8a, #0f172a);
+    background-size: 400% 400%;
+    animation: gradientMove 8s ease infinite;
+}
+
+/* Tipografia: estilos de títulos principais (h1) */
+h1 {
+    font-family: "Barlow Condensed", sans-serif;
+    color: rgb(3, 37, 138);
+    font-size: 50px;
+    font-weight: 900;
+    margin: 1rem;
+}
+
+
+#clear-btn{
+    /*  transition: background-color 0.3s ease, transform 0.3s ease;
+        transform: scale(1.1);  Aumenta o tamanho do botão em 10% */
+
+    border-radius: 20px;
+    background-color: #55584f;
+    color:rgb(255, 255, 255);
+    font-weight: bold;
+    
+}
+
+#btn-correct{
+
+    border-radius: 20px;
+    transition: all 0.3s ease; 
+
+} 
+ 
+#btn-wrong{
+    transition: all 0.3s ease;
+    border-radius: 20px;
+}
+
+#caixa{
+    background-color:rgb(7, 0, 29);
+    border-radius: 30px;
+    box-shadow: 8px 8px 3px rgba(66, 65, 111, 0.367);
+    border: 1px solid rgb(15, 0, 62);
+    position: relative;
+    z-index: 5;
+}
+
+#suggestions{
+    background-color:rgb(7, 0, 29);
+    border: 2px solid rgb(0, 0, 0);
+    border-radius: 30px;
+    box-shadow: 8px 8px 3px rgba(66, 65, 111, 0.367);
+    position: relative;
+    z-index: 5;
+}
+
+/* Classe utilitária para textos descritivos ou de apoio */
+.td {
+    font-size: 20px;
+    font-weight: 400;
+}
+
+/* Cabeçalhos e rótulos de campos de entrada (tema/usuário) */
+.tema, .user {
+    font-size: 25px;
+    font-weight: 600; 
+    font-family: "Noto Sans", sans-serif;
+    color: #ffffff;
+    margin-bottom: 0.5rem;
+
+}
+
+/* Texto auxiliar abaixo dos títulos de seção */
+.tt {
+    font-size: 18px;
+    font-weight: 400;
+    color: #ccddff;
+    margin-bottom: 1rem;
+}
+
+.bx bxs-user{
+    color: #ffffff;
+}
+
+/* Input do usuário: aparência, estados e transições de foco */
+.input {
+    padding: 15px;
+    color: #002e6f;
+    border: 3px solid rgb(0, 45, 143);
+    width: 280px;
+    height: 45px;
+    border-radius: 10px;
+    margin-top: 15px;
+    margin-left: 15px;
+    font-size: 16px;
+    transition: all 0.3s ease;
+    background-color:rgb(213, 230, 255);
+}
+
+.input:focus {
+    outline: none;
+    border-color: #1E40AF;
+    box-shadow: 0 0 0 3px rgba(30, 64, 175, 0.1);
+}
+
+/* Botões principais: estilo base e interação de hover */
+.btn {
+    background-color:rgb(2, 82, 202);
+    font-weight: 500;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    padding: 12px 24px;
+    height: 45px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin: 0.5rem;
+}
+
+.btn:hover {
+    background-color: #1E3A8A;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(30, 64, 175, 0.3);
+}
+
+/* Botões secundários em tom cinza */
+.btn-gray {
+    background-color: #0240bb;
+    color: white;
+    border: none;
+    border-radius: 12px;
+    padding: 8px 16px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-gray:hover {
+    background-color: #4B5563;
+}
+
+#caixa-n{
+    border-radius: 40px;
+    box-shadow: 0 4px 12px rgba(30, 64, 175, 0.3);
+    border: 2px solid rgb(0, 52, 100);
+    background-color: #000000;
+    opacity: 1;
+    background: #000000;
+}
+
+#caixa-t{
+    border-radius: 40px;
+    box-shadow: 0 4px 12px rgba(30, 64, 175, 0.3);
+    background-color: #000000;
+    opacity: 1;
+    background: #000000;
+}
+
+/* Timer: cápsula com destaque para contagem regressiva */
+.timer {
+    background-color: #1E40AF;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 30px;
+    font-weight: 600;
+    font-size: 25px;
+    transition: all 0.3s ease;
+
+}
+
+#correct-guess-container{
+    border-radius: 15px;
+    font-size: 20px;
+}
+
+/* Estado de alerta do timer quando o tempo estiver acabando */
+.timer-warning {
+    background-color: #DC2626 !important;
+    animation: pulse 1s infinite;
+}
+
+text-xl{
+    color: #ccddff;
+}
+
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+/* Canvas do desenho: borda, raio e sombra para destaque visual */
+canvas {
+    border: 2px solid #00208a;
+    border-radius: 8px;
+    touch-action: none;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    /* Área interna do canvas permanece branca para desenhar */
+    background-color: #e8eeff;
+    display: block;
+    width: 100% !important;
+    height: auto !important;
+}
+
+/* Sugestões: chips com leve destaque azul */
+#suggestion-items div {
+    background-color: #DBEAFE;
+    color: #1E40AF;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: 500;
+    border: 1px solid #BFDBFE;
+}
+
+/* Área externa ao canvas: aplica azul claro apenas ao contêiner do canvas
+   para que somente a área de desenho (canvas) fique branca */
+#sketch-container {
+    background-color: #DBEAFE; /* azul claro */
+    padding: 12px;
+    border-radius: 8px;
+    /* Centraliza no desktop e limita a largura para o canvas ficar alinhado */
+    width: 100%;
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Área de análise da IA: animação e alinhamento */
+.ai-guess {
+    transition: all 0.3s ease;
+    min-height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Estilo para quando a IA não reconhece o desenho */
+.ai-guess.not-recognized {
+    color: #ff6b6b;
+    font-weight: bold;
+    animation: shake 0.5s ease-in-out;
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    75% { transform: translateX(5px); }
+}
+
+/* Efeito de celebração quando a IA acerta */
+.correct-guess {
+    animation: celebrate 0.5s ease 3;
+}
+
+@keyframes celebrate {
+    0% { transform: translateY(0); }
+    25% { transform: translateY(-5px); }
+    50% { transform: translateY(0); }
+    75% { transform: translateY(-5px); }
+    100% { transform: translateY(0); }
+}
+
+/* Animação para movimento do gradiente de fundo */
+@keyframes gradientMove {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* Animação para as bolinhas brancas flutuantes */
+@keyframes floatingParticles {
+    0% { 
+        transform: translateY(0px) translateX(0px);
+        opacity: 0.6;
+    }
+    25% { 
+        transform: translateY(-40px) translateX(25px);
+        opacity: 0.9;
+    }
+    50% { 
+        transform: translateY(-20px) translateX(-30px);
+        opacity: 0.7;
+    }
+    75% { 
+        transform: translateY(-60px) translateX(15px);
+        opacity: 0.95;
+    }
+    100% { 
+        transform: translateY(0px) translateX(0px);
+        opacity: 0.6;
+    }
+}
+
+/* Container de acerto: feedback positivo em verde com gradiente sutil */
+#correct-guess-container {
+    background: linear-gradient(135deg, #D1FAE5, #A7F3D0);
+    border: 2px solid #10B981;
+    color: #065F46;
+    margin: 15px;
+}
+
+#btn-correct{
+    margin-left: 380px;
+    margin-right: 20px;
+
+}
+/* Botões de feedback: microinterações para clique */
+#btns-feedback button {
+    transition: all 0.3s ease;
+}
+
+#btns-feedback button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* Ranking: cards com leve gradiente e deslocamento no hover */
+#ranking-list div {
+    background: linear-gradient(135deg, #F8FAFC, #F1F5F9);
+    border: 1px solid #E2E8F0;
+    transition: all 0.3s ease;
+}
+
+#ranking-list div:hover {
+    background: linear-gradient(135deg, #F1F5F9, #E2E8F0);
+    transform: translateX(4px);
+}
+
+/* Responsividade: ajustes de layout para telas menores */
+@media (max-width: 768px) {
+    .container {
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+    
+    .max-w-md {
+        max-width: 100%;
+    }
+    
+    .max-w-3xl {
+        max-width: 100%;
+    }
+    
+    .input {
+        width: 100%;
+        margin-left: 0;
+    }
+    
+    .btn {
+        width: 100%;
+        margin: 0.5rem 0;
+    }
+    
+    #sketch-container canvas {
+        width: 100% !important;
+        height: auto !important;
+    }
+}
+
+/* Utilitários: controle de visibilidade */
+.hidden {
+    display: none !important;
+}
+
+/* Melhorias visuais gerais: vidro fosco e sombras sutis */
+.bg-white {
+    backdrop-filter: blur(10px);
+    background-color: rgba(255, 255, 255, 0.95);
+}
+
+.shadow {
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+.rounded-xl {
+    border-radius: 1rem;
+}
+
+/* Estados de hover e desabilitado para elementos interativos */
+button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+/* Scrollbar personalizada: largura, trilho e polegar com cor do tema */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #1E40AF;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #1E3A8A;
+}
