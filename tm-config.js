@@ -6,8 +6,8 @@
 window.TM_CONFIG = {
     modelUrls: {
         "pre-history": {
-            model: "https://teachablemachine.withgoogle.com/models/ImiGq3fB3/model.json",
-            metadata: "https://teachablemachine.withgoogle.com/models/ImiGq3fB3/metadata.json"
+            model: "https://teachablemachine.withgoogle.com/models/XpHdnrolV/model.json",
+            metadata: "https://teachablemachine.withgoogle.com/models/XpHdnrolV/metadata.json"
         },
         "world-wars": {
             model: "https://teachablemachine.withgoogle.com/models/HwMqIYLgK/model.json",
@@ -25,5 +25,6 @@ window.TM_CONFIG = {
         // "fire": "Fogo"
     }
 };
+
 
 
