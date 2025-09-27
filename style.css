@@ -83,7 +83,7 @@ body::before {
    - height define a altura do cabeçalho sem depender de conteúdo no HTML
    - box-shadow cria uma sombra apenas na parte inferior do cabeçalho */
 header {
-    background-image: url("./fecart .png");
+    background-image: url("./fecart.png");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
